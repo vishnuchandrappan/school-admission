@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { DataContext } from "../services/DataService";
-import { Input, Checkbox } from "antd";
+import { Input, Checkbox, Card } from "antd";
 
 const { TextArea } = Input;
 
@@ -19,7 +19,7 @@ export const Address = () => {
     } = useContext(DataContext);
 
     return (
-        <>
+        <Card>
             <div className="label">Permanent Address</div>
             <TextArea value={permanentAddress} onChange={setPermanentAddress} />
 
@@ -54,6 +54,6 @@ export const Address = () => {
                 type="number"
                 placeholder="688582"
             />
-        </>
+        </Card>
     );
 };

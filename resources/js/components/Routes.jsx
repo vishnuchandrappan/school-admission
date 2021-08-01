@@ -15,7 +15,11 @@ export const Routes = () => {
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/verifyUser" component={VerifyUser} />
-            <Route path="/form" component={ManagementForm} />
+            <ProtectedRoute
+                exact
+                path="/forms/management"
+                component={ManagementForm}
+            />
             <Route component={NotFound} />
         </Switch>
     );

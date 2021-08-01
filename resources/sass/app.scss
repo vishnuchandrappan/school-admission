@@ -11,6 +11,10 @@
     box-sizing: border-box;
 }
 
+.ant-card.ant-card-bordered {
+    margin: 1em 0;
+}
+
 #app {
     font-family: $font;
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateDetailsRequest;
+use App\Models\DocType;
 use Illuminate\Http\Request;
 
 class DetailsController extends Controller
@@ -10,9 +11,15 @@ class DetailsController extends Controller
     public function store(CreateDetailsRequest $request)
     {
         $user = auth()->user();
-        $data = $request->only(['meta']);
-        $user->details()->create($data);
+        $data = [
+            'data' => $request->meta
+        ];
 
-        return $this->SuccessResponse('details updated');
+        $docType = DocType::where('name', $request->doc_type)->first();
+        $data['doc_type_id'] = $docType->id;
+
+        $details = $user->details()->create($data);
+
+        return $this->SuccessData($details);
     }
 }

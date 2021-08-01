@@ -13,6 +13,9 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 999;
   background-color: #393e46;
   color: #eeeeee;
   padding: 1em;
@@ -48,7 +51,7 @@
 }
 
 .content {
-  min-height: 80vh;
+  min-height: 90vh;
   padding-top: 3em;
 }
 .content .options {
@@ -80,6 +83,16 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.form-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form--heading {
+  text-align: center;
 }
 
 /*!
@@ -10088,6 +10101,10 @@ h3 {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.ant-card.ant-card-bordered {
+  margin: 1em 0;
 }
 
 #app {

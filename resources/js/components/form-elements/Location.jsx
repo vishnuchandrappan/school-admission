@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { DataContext } from "../services/DataService";
-import { Input } from "antd";
+import { Card, Input } from "antd";
 
 export const Location = () => {
     const {
@@ -15,7 +15,7 @@ export const Location = () => {
     } = useContext(DataContext);
 
     return (
-        <>
+        <Card>
             <div className="label">Place of Residence: State</div>
             <Input
                 value={state}
@@ -47,6 +47,6 @@ export const Location = () => {
                 type="text"
                 placeholder="Eg: Kalamassery"
             />
-        </>
+        </Card>
     );
 };

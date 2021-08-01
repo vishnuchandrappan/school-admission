@@ -10,9 +10,8 @@ class Details extends Model
     use HasFactory;
 
     protected $fillable = [
-        'meta',
-        'image',
-        'docs',
+        'data',
+        'doc_type_id'
     ];
 
     public function user()
@@ -23,23 +22,18 @@ class Details extends Model
     /**
      * Mutator
      */
-    public function setMetaAttribute($value)
+    public function setDataAttribute($value)
     {
-        $this->attributes['meta'] = json_encode($value);
+        $this->attributes['data'] = json_encode($value);
     }
 
-    public function getMetaAttribute($value)
+    public function getDataAttribute($value)
     {
         return json_decode($value);
     }
 
-    public function setDocsAttribute($value)
+    public function docType()
     {
-        $this->attributes['docs'] = json_encode($value);
-    }
-
-    public function getDocsAttribute($value)
-    {
-        return json_decode($value);
+       return $this->belongsTo(DocType::class);
     }
 }

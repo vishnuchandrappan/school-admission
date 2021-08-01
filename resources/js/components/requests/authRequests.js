@@ -9,6 +9,21 @@ export const loginRequest = (values) => {
 };
 
 export const verifyUserRequest = (user, hash) => {
-    console.log("wi=");
     return api.put(`/api/users/verifyUser?sub=${user}&hash=${hash}`);
+};
+
+export const managementFormRequest = (values, token) => {
+    api.defaults.headers.common = { Authorization: `bearer ${token}` };
+    return api.post("/api/details", {
+        meta: values,
+        doc_type: "management_form",
+    });
+};
+
+export const communityFormRequest = (values, token) => {
+    api.defaults.headers.common = { Authorization: `bearer ${token}` };
+    return api.post("/api/details", {
+        meta: values,
+        doc_type: "community_form",
+    });
 };

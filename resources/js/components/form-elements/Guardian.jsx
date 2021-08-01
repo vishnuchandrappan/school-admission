@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { DataContext } from "../services/DataService";
-import { Input } from "antd";
+import { Card, Input } from "antd";
 
 export const Guardian = () => {
     const { guardian, setGuardian, guardianOccupation, setGuardianOccupation } =
         useContext(DataContext);
 
     return (
-        <>
+        <Card>
             <div className="label">Name of Father / Mother / Guardian</div>
             <Input
                 value={guardian}
@@ -24,6 +24,6 @@ export const Guardian = () => {
                 type="text"
                 placeholder="Eg: Musician"
             />
-        </>
+        </Card>
     );
 };

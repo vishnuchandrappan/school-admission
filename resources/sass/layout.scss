@@ -16,6 +16,10 @@
         align-items: center;
         flex-wrap: wrap;
 
+        position: sticky;
+        top: 0;
+        z-index: 999;
+
         background-color: $gray;
         color: $white;
         padding: 1em;
@@ -62,7 +66,7 @@
 }
 
 .content {
-    min-height: 80vh;
+    min-height: 90vh;
     padding-top: 3em;
 
     .options {
@@ -98,4 +102,16 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.form-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form {
+    &--heading {
+        text-align: center;
+    }
 }

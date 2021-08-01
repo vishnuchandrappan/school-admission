@@ -25,6 +25,7 @@ class CreateDetailsRequest extends FormRequest
     {
         return [
             'meta' => 'required',
+            'doc_type' => 'required|exists:doc_types,name'
         ];
     }
 }

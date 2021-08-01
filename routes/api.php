@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DetailsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,4 +33,11 @@ Route::group([
 ], function ($router) {
     Route::post('/', [UserController::class, 'store']);
     Route::put('/verifyUser', [UserController::class, 'verifyUser']);
+});
+
+Route::group([
+    'middleware' => 'auth',
+    'prefix' => 'details'
+], function ($router) {
+    Route::post('/', [DetailsController::class, 'store']);
 });

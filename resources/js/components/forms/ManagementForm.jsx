@@ -7,12 +7,9 @@ import {
     Radio,
     Checkbox,
     Divider,
-    Card,
+    message,
 } from "antd";
 import { FormHeader } from "../FormHeader";
-import { Plus, X } from "react-feather";
-import { useDynamicObject } from "../hooks/useDynamicObject";
-import { useBoolean } from "../hooks/useBoolean";
 import { Declaration } from "../Declaration";
 import { DeclarationContext } from "../services/DeclarationService";
 import { useDate } from "../hooks/useDate";
@@ -27,6 +24,9 @@ import { Preferences } from "../form-elements/Preferences";
 import { PhoneEmail } from "../form-elements/PhoneEmail";
 import { PreviousAttempts } from "../form-elements/PreviousAttempts";
 import { Marks } from "../form-elements/Marks";
+import { DataContext } from "../services/DataService";
+import { managementFormRequest } from "../requests/authRequests";
+import { AuthContext } from "../services/AuthService";
 
 const { Item } = Form;
 
@@ -40,44 +40,94 @@ const plainOptions = [
 ];
 
 export const ManagementForm = () => {
+    const [passing, setPassing] = useDate();
+    const [submitted, setSubmitted] = useState(false);
+
+    const { token } = useContext(AuthContext);
     const { accepted, place } = useContext(DeclarationContext);
 
-    const [passing, setPassing] = useDate();
+    const {
+        name,
+        school,
+        gender,
+        dob,
+        guardian,
+        guardianOccupation,
+        state,
+        district,
+        taluk,
+        gramaPanchayath,
+        permanentAddress,
+        permanentPin,
+        isAddressSame,
+        currentAddress,
+        currentPin,
+        phone,
+        email,
+        havePreviousAttempts,
+        previousAttempts,
+        grades,
+        otherGrades,
+        preferences,
+    } = useContext(DataContext);
 
-    const onFinish = (values) => {
-        console.log("values => ", values);
-        // const data = {
-        //     ...values,
-        //     passing,
-        //     dob,
-        //     grades,
-        //     otherGrades,
-        //     preferences,
-        //     place,
-        // };
+    // check passing issue
+    // refactor differently abled
 
-        // if (isAddressSame) {
-        //     data["current_address"] = data["permanent_address"];
-        //     data["current_pin"] = data["permanent_pin"];
-        // } else if (
-        //     ["current_address"].length === 0 ||
-        //     data["current_pin"].length === 0
-        // ) {
-        //     alert("Current address or pin cannot be blank");
-        //     return;
-        // }
+    const onFinish = async (values) => {
+        const data = {
+            ...values,
+            school,
+            name,
+            gender,
+            dob,
+            guardian,
+            guardianOccupation,
+            state,
+            district,
+            taluk,
+            gramaPanchayath,
+            permanentAddress,
+            permanentPin,
+            phone,
+            email,
+            grades,
+            otherGrades,
+            preferences,
+            place,
+            passing,
+        };
 
-        // if (havePreviousAttempts) {
-        //     data["previousAttempts"] = previousAttempts;
-        // }
+        if (isAddressSame) {
+            data["currentAddress"] = data["permanentAddress"];
+            data["currentPin"] = data["permanentPin"];
+        } else {
+            data["currentAddress"] = currentAddress;
+            data["currentPin"] = currentPin;
+        }
 
-        // console.log("Received values of form: ", data);
+        data["previousAttempts"] = havePreviousAttempts ? previousAttempts : [];
+
+        try {
+            const response = await managementFormRequest(data, token);
+            message.success("Form submitted successfully");
+            setSubmitted(response.data);
+        } catch (e) {
+            message.error("Something went wrong. Please try again");
+        }
+
+        console.log("Received values of form: ", data);
     };
 
     return (
-        <>
+        <div className="form">
             <FormHeader />
-            <h2 className="form--heading">Management Quota</h2>
+            <div className="form--heading">
+                <h2>Management Quota</h2>
+                {submitted && (
+                    <h4>Application Number: 2021-22/M/{submitted?.data?.data?.id || "error"}</h4>
+                )}
+            </div>
             <Divider />
             <Form
                 name="management_form"
@@ -196,6 +246,6 @@ export const ManagementForm = () => {
                     </Button>
                 </Item>
             </Form>
-        </>
+        </div>
     );
 };
