@@ -19,4 +19,27 @@ class Details extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Mutator
+     */
+    public function setMetaAttribute($value)
+    {
+        $this->attributes['meta'] = json_encode($value);
+    }
+
+    public function getMetaAttribute($value)
+    {
+        return json_decode($value);
+    }
+
+    public function setDocsAttribute($value)
+    {
+        $this->attributes['docs'] = json_encode($value);
+    }
+
+    public function getDocsAttribute($value)
+    {
+        return json_decode($value);
+    }
 }
