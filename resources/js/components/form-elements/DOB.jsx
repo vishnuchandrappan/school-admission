@@ -1,23 +1,14 @@
 import React, { useContext } from "react";
 import { DataContext } from "../services/DataService";
-import { Form, DatePicker } from "antd";
-
-const { Item } = Form;
+import { DatePicker } from "antd";
 
 export const DOB = () => {
     const { setDob } = useContext(DataContext);
 
     return (
-        <Item
-            name="dob"
-            label="Date of birth"
-            rules={[
-                {
-                    required: true,
-                },
-            ]}
-        >
+        <>
+            <div className="label">Date of birth</div>
             <DatePicker placeholder="Date of birth" onChange={setDob} />
-        </Item>
+        </>
     );
 };

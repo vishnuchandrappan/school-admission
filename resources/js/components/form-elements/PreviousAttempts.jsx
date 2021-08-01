@@ -1,9 +1,7 @@
-import { Form, Checkbox, Input, DatePicker, Button } from "antd";
+import { Checkbox, Input, DatePicker, Button } from "antd";
 import React, { useContext } from "react";
 import { Plus, X } from "react-feather";
 import { DataContext } from "../services/DataService";
-
-const { Item } = Form;
 
 export const PreviousAttempts = () => {
     const {
@@ -17,15 +15,13 @@ export const PreviousAttempts = () => {
 
     return (
         <>
-            <Item>
-                <Checkbox
-                    checked={havePreviousAttempts}
-                    onChange={togglePreviousAttempts}
-                >
-                    Have you appeared for SSLC or equivalent examination more
-                    than once ?
-                </Checkbox>
-            </Item>
+            <Checkbox
+                checked={havePreviousAttempts}
+                onChange={togglePreviousAttempts}
+            >
+                Have you appeared for SSLC or equivalent examination more than
+                once ?
+            </Checkbox>
 
             {havePreviousAttempts && (
                 <>

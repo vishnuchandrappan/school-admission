@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import { DataContext } from "../services/DataService";
-import { Input, Form } from "antd";
-
-const { Item } = Form;
+import { Input } from "antd";
 
 export const Location = () => {
     const {
@@ -18,71 +16,37 @@ export const Location = () => {
 
     return (
         <>
-            <Item
-                name="state"
-                label="Place of Residence: State"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Input
-                    value={state}
-                    onChange={setState}
-                    type="text"
-                    placeholder="Eg: Kerala"
-                />
-            </Item>
-            <Item
-                name="district"
-                label="District"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Input
-                    value={district}
-                    onChange={setDistrict}
-                    type="text"
-                    placeholder="Eg: Ernakulam"
-                />
-            </Item>
-            <Item
-                name="taluk"
-                label="Taluk"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Input
-                    value={taluk}
-                    onChange={setTaluk}
-                    type="text"
-                    placeholder="Eg: Kochi"
-                />
-            </Item>
+            <div className="label">Place of Residence: State</div>
+            <Input
+                value={state}
+                onChange={setState}
+                type="text"
+                placeholder="Eg: Kerala"
+            />
+            <div className="label">District</div>
+            <Input
+                value={district}
+                onChange={setDistrict}
+                type="text"
+                placeholder="Eg: Ernakulam"
+            />
+            <div className="label">Taluk</div>
+            <Input
+                value={taluk}
+                onChange={setTaluk}
+                type="text"
+                placeholder="Eg: Kochi"
+            />
 
-            <Item
-                name="grama_panchayath"
-                label="Grama Panchayath / Municipality / Corporation"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Input
-                    value={gramaPanchayath}
-                    onChange={setGramaPanchayath}
-                    type="text"
-                    placeholder="Eg: Kalamassery"
-                />
-            </Item>
+            <div className="label">
+                Grama Panchayath / Municipality / Corporation
+            </div>
+            <Input
+                value={gramaPanchayath}
+                onChange={setGramaPanchayath}
+                type="text"
+                placeholder="Eg: Kalamassery"
+            />
         </>
     );
 };

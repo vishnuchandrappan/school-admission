@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import { DataContext } from "../services/DataService";
-import { Input, Form } from "antd";
-
-const { Item } = Form;
+import { Input } from "antd";
 
 export const Guardian = () => {
     const { guardian, setGuardian, guardianOccupation, setGuardianOccupation } =
@@ -10,38 +8,22 @@ export const Guardian = () => {
 
     return (
         <>
-            <Item
-                name="guardian"
-                label="Name of Father / Mother / Guardian"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Input
-                    value={guardian}
-                    onChange={setGuardian}
-                    type="text"
-                    placeholder="Eg: James Sirius Potter"
-                />
-            </Item>
-            <Item
-                name="guardian_occupation"
-                label="Occupation of Father / Mother / Guardian"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Input
-                    value={guardianOccupation}
-                    onChange={setGuardianOccupation}
-                    type="text"
-                    placeholder="Eg: Musician"
-                />
-            </Item>
+            <div className="label">Name of Father / Mother / Guardian</div>
+            <Input
+                value={guardian}
+                onChange={setGuardian}
+                type="text"
+                placeholder="Eg: James Sirius Potter"
+            />
+            <div className="label">
+                Occupation of Father / Mother / Guardian
+            </div>
+            <Input
+                value={guardianOccupation}
+                onChange={setGuardianOccupation}
+                type="text"
+                placeholder="Eg: Musician"
+            />
         </>
     );
 };

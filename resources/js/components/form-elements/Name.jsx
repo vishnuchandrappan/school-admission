@@ -1,28 +1,20 @@
 import React, { useContext } from "react";
 import { DataContext } from "../services/DataService";
-import { Input, Form } from "antd";
-
-const { Item } = Form;
+import { Input } from "antd";
 
 export const Name = () => {
     const { name, setName } = useContext(DataContext);
 
     return (
-        <Item
-            name="name"
-            label="Name of Applicant"
-            rules={[
-                {
-                    required: true,
-                },
-            ]}
-        >
+        <>
+            <div className="label">Name of Applicant</div>
+
             <Input
                 value={name}
                 onChange={setName}
                 type="text"
                 placeholder="Eg: Harry James Potter"
             />
-        </Item>
+        </>
     );
 };

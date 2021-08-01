@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 import Particles from "react-tsparticles";
 
-import particleData from '../../utils/particles.json';
+import particleData from "../../utils/particles.json";
 
 export const Login = () => {
     return (
@@ -11,5 +11,5 @@ export const Login = () => {
                 <h1>Login</h1>
             </div>
         </div>
-    )
-}
+    );
+};

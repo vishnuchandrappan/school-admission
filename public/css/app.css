@@ -10070,3 +10070,19 @@ h3 {
   justify-content: flex-end;
   margin-right: 2em;
 }
+
+.ant-select.ant-select-single.ant-select-show-arrow {
+  width: 100%;
+}
+
+.label {
+  margin-top: 2em;
+  margin-bottom: 0.4em;
+}
+
+.login {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+}

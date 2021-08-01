@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { DataContext } from "../services/DataService";
-import { Input, Form, Checkbox } from "antd";
+import { Input, Checkbox } from "antd";
 
-const { Item } = Form;
 const { TextArea } = Input;
 
 export const Address = () => {
@@ -21,64 +20,40 @@ export const Address = () => {
 
     return (
         <>
-            <Item
-                name="permanent_address"
-                label="Permanent Address"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <TextArea
-                    value={permanentAddress}
-                    onChange={setPermanentAddress}
-                />
-            </Item>
+            <div className="label">Permanent Address</div>
+            <TextArea value={permanentAddress} onChange={setPermanentAddress} />
 
-            <Item
-                name="permanent_pin"
-                label="Pin"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Input
-                    value={permanentPin}
-                    onChange={setPermanentPin}
-                    type="number"
-                    placeholder="688582"
-                />
-            </Item>
+            <div className="label">Pin</div>
 
-            <Item>
-                <Checkbox checked={isAddressSame} onChange={toggleSameAddress}>
-                    Same as permanent address
-                </Checkbox>
-            </Item>
+            <Input
+                value={permanentPin}
+                onChange={setPermanentPin}
+                type="number"
+                placeholder="688582"
+            />
 
-            <Item
-                name="current_address"
-                label="Address to which communications are to be sent"
-            >
-                <TextArea
-                    value={currentAddress}
-                    onChange={setCurrentAddress}
-                    disabled={isAddressSame}
-                />
-            </Item>
+            <Checkbox checked={isAddressSame} onChange={toggleSameAddress}>
+                Same as permanent address
+            </Checkbox>
 
-            <Item name="current_pin" label="Pin">
-                <Input
-                    value={currentPin}
-                    onChange={setCurrentPin}
-                    disabled={isAddressSame}
-                    type="number"
-                    placeholder="688582"
-                />
-            </Item>
+            <div className="label">
+                Address to which communications are to be sent
+            </div>
+
+            <TextArea
+                value={currentAddress}
+                onChange={setCurrentAddress}
+                disabled={isAddressSame}
+            />
+
+            <div className="label">Pin</div>
+            <Input
+                value={currentPin}
+                onChange={setCurrentPin}
+                disabled={isAddressSame}
+                type="number"
+                placeholder="688582"
+            />
         </>
     );
 };
