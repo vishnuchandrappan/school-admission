@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import Particles from "react-tsparticles";
 import { Form, Input, Button, Alert } from "antd";
 import particleData from "../../utils/particles.json";
-import { registerRequest } from "./requests/authRequests";
-import { parseError } from "./utils/parseError";
+import { registerRequest } from "../requests/authRequests";
+import { parseError } from "../utils/parseError";
+import { Link } from "react-router-dom";
 
 export const Register = () => {
     const [loading, setLoading] = useState(false);
@@ -170,6 +171,11 @@ export const Register = () => {
                                         showIcon
                                     />
                                 ))}
+
+                            <div>
+                                Already have an account ?
+                                <Link to="/login"> Login </Link>instead
+                            </div>
                         </div>
                     </>
                 )}

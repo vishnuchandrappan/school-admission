@@ -10102,3 +10102,22 @@ h3 {
   left: 0;
   top: 0;
 }
+
+.full-screen {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.verify-container {
+  min-height: 100vh;
+  min-width: 100vw;
+  background: #eeeeee;
+  box-shadow: 0 0 10em #393e46;
+}
+
+.column {
+  flex-direction: column;
+}
