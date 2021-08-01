@@ -3,20 +3,22 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Routes } from "./Routes";
 import "antd/dist/antd.css";
+import "react-gravatar-or-initials/dist/index.css";
 import { DeclarationService } from "./services/DeclarationService";
 import { DataService } from "./services/DataService";
+import { AuthService } from "./services/AuthService";
 
 function App() {
     return (
-        <BrowserRouter>
-            <DataService>
-                <DeclarationService>
-                    <div className="container">
+        <AuthService>
+            <BrowserRouter>
+                <DataService>
+                    <DeclarationService>
                         <Routes />
-                    </div>
-                </DeclarationService>
-            </DataService>
-        </BrowserRouter>
+                    </DeclarationService>
+                </DataService>
+            </BrowserRouter>
+        </AuthService>
     );
 }
 

@@ -1,4 +1,87 @@
 @charset "UTF-8";
+.student-layout .title {
+  width: 100%;
+  padding: 1em;
+  text-align: center;
+  background-color: #00adb5;
+  color: #222831;
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+.student-layout .nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #393e46;
+  color: #eeeeee;
+  padding: 1em;
+}
+.student-layout .nav-left, .student-layout .nav-right {
+  flex: 1;
+}
+.student-layout .nav-left {
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.student-layout .nav-left .nav-item {
+  margin-right: 2.5em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.student-layout .nav-left .nav-item svg {
+  margin-right: 0.6em;
+}
+.student-layout .nav-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.student-layout .nav-right--name {
+  margin-right: 1em;
+}
+.student-layout .nav-right--avatar {
+  border-radius: 50%;
+}
+
+.content {
+  min-height: 80vh;
+  padding-top: 3em;
+}
+.content .options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.content .options-item {
+  min-width: 25em;
+  border: solid;
+  padding: 2em;
+  margin: 1em;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 10em;
+}
+.content .options-item:hover {
+  box-shadow: 0 0 3em #393e46;
+}
+
+.footer {
+  background-color: #393e46;
+  color: #eeeeee;
+  padding: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -10020,6 +10103,11 @@ h3 {
 
 .flex-1 {
   flex: 1 !important;
+}
+
+a {
+  color: inherit !important;
+  text-decoration: none !important;
 }
 
 .new-btn {

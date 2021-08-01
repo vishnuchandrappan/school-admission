@@ -56,6 +56,7 @@ class UserController extends Controller
         }
 
         $user->email_verified_at = Carbon::now();
+        $user->save();
         return $this->SuccessResponse('user verified');
     }
 

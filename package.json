@@ -27,7 +27,9 @@
     "dependencies": {
         "antd": "^4.16.9",
         "jwt-decode": "^3.1.2",
+        "react-cookie": "^4.0.3",
         "react-feather": "^2.0.9",
+        "react-gravatar-or-initials": "^1.0.2",
         "react-particles-js": "^3.5.3",
         "react-redux": "^7.2.4",
         "react-router-dom": "^5.2.0",

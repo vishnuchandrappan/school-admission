@@ -7,5 +7,5 @@ export const useBoolean = (initialValue) => {
         setValue((value) => !value);
     };
 
-    return [value, toggleValue];
+    return [value, toggleValue, setValue];
 };

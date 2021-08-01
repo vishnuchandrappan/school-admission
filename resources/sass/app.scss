@@ -1,5 +1,6 @@
 // Variables
 @import "variables";
+@import "./layout.scss";
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
@@ -23,6 +24,11 @@
 
 .flex-1 {
     flex: 1 !important;
+}
+
+a {
+    color: inherit !important;
+    text-decoration: none !important;
 }
 
 .new-btn {
