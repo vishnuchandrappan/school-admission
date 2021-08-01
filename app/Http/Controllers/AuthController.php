@@ -32,7 +32,7 @@ class AuthController extends Controller
             return $this->ErrorResponse('Unauthorized', 401);
         }
 
-        $user = User::where(['email', $request->email]);
+        $user = User::where(['email', $request->email])->first();
 
         if (!$user->email_verified_at) {
             return $this->ErrorResponse('Verify your account to continue. Check email for verification', 403);

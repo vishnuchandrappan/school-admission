@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Mail\VerificationMail;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 
 class UserController extends Controller
 {
@@ -47,7 +51,7 @@ class UserController extends Controller
             return $this->ErrorResponse('unauthorized', 401);
         }
 
-        if (!Hash::check($user->name + $user->created_at, $request->hash)) {
+        if (!Hash::check("$user->name $user->created_at", $request->hash)) {
             return $this->ErrorResponse('forbidden', 403);
         }
 
@@ -57,7 +61,6 @@ class UserController extends Controller
 
     private function sendVerificationEmail(User $user)
     {
-        $hash = Hash::make($user->name + $user->created_at);
-        // send mail
+        Mail::to($user)->send(new VerificationMail($user));
     }
 }
