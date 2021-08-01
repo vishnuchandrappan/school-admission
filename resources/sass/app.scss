@@ -89,9 +89,30 @@
 }
 
 .login {
-    position: absolute;
+    background: $white;
+
+    border-radius: 2em;
+
+    min-width: 50vw;
+    min-height: 50vh;
+
+    padding: 3em;
+
+    box-shadow: 0 0 10em $gray;
+
+    h1 {
+        text-align: center;
+    }
+}
+
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+
     left: 0;
     top: 0;
-
-    transform: translate(-50%, -50%);
 }
