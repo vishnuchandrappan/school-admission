@@ -39,5 +39,8 @@ Route::group([
     'middleware' => 'auth',
     'prefix' => 'details'
 ], function ($router) {
-    Route::post('/', [DetailsController::class, 'store']);
+    Route::post('/', [
+        DetailsController::class, 'store'
+    ]);
+    Route::get('/', [DetailsController::class, 'show']);
 });

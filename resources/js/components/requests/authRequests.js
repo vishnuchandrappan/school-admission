@@ -27,3 +27,14 @@ export const communityFormRequest = (values, token) => {
         doc_type: "community_form",
     });
 };
+
+export const getManagementFormRequest = (token) => {
+    api.defaults.headers.common = { Authorization: `bearer ${token}` };
+    return api.get(`/api/details?doc_type=management_form`);
+};
+
+
+export const getCommunityFormRequest = (token) => {
+    api.defaults.headers.common = { Authorization: `bearer ${token}` };
+    return api.get(`/api/details?doc_type=community_form`);
+};

@@ -7,16 +7,19 @@ import "react-gravatar-or-initials/dist/index.css";
 import { DeclarationService } from "./services/DeclarationService";
 import { DataService } from "./services/DataService";
 import { AuthService } from "./services/AuthService";
+import { CommunityDataService } from "./services/CommunityDataService";
 
 function App() {
     return (
         <AuthService>
             <BrowserRouter>
-                <DataService>
-                    <DeclarationService>
-                        <Routes />
-                    </DeclarationService>
-                </DataService>
+                <CommunityDataService>
+                    <DataService>
+                        <DeclarationService>
+                            <Routes />
+                        </DeclarationService>
+                    </DataService>
+                </CommunityDataService>
             </BrowserRouter>
         </AuthService>
     );

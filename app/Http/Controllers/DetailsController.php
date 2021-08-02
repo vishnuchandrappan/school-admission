@@ -22,4 +22,23 @@ class DetailsController extends Controller
 
         return $this->SuccessData($details);
     }
+
+    public function show(Request $request)
+    {
+        $docTypeName = $request->doc_type;
+
+        try {
+            $docType = DocType::where('name', $docTypeName)->firstOrFail();
+        } catch (\Exception $e) {
+            return $this->ErrorResponse('Invalid doc type');
+        }
+
+        try {
+            $details = auth()->user()->details()->where('doc_type_id', $docType->id)->firstOrFail();
+        } catch (\Exception $e) {
+            return $this->SuccessData(null);
+        }
+
+        return $this->SuccessData($details);
+    }
 }
