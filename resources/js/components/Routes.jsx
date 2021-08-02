@@ -7,6 +7,7 @@ import { ManagementForm } from "./forms/ManagementForm";
 import { Register } from "./pages/Register";
 import { VerifyUser } from "./pages/VerifyUser";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { CommunityForm } from "./forms/CommunityForm";
 
 export const Routes = () => {
     return (
@@ -19,6 +20,11 @@ export const Routes = () => {
                 exact
                 path="/forms/management"
                 component={ManagementForm}
+            />
+            <ProtectedRoute
+                exact
+                path="/forms/community"
+                component={CommunityForm}
             />
             <Route component={NotFound} />
         </Switch>

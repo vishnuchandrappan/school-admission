@@ -30,7 +30,7 @@ import { AuthContext } from "../services/AuthService";
 
 const { Item } = Form;
 
-const plainOptions = [
+export const plainOptions = [
     "Orthopaedical",
     "Blind",
     "Deaf",
