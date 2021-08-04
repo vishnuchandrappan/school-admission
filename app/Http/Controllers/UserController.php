@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Mail\VerificationMail;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
@@ -58,6 +60,25 @@ class UserController extends Controller
         $user->email_verified_at = Carbon::now();
         $user->save();
         return $this->SuccessResponse('user verified');
+    }
+
+    public function updatePassword(UpdatePasswordRequest $request)
+    {
+        $user = auth()->user();
+
+        $credentials = [
+            'email' => $user->email,
+            'password' => $request->current_password,
+        ];
+
+        if (!Auth::attempt($credentials)) {
+            return $this->ErrorResponse('Your current password is wrong', 401);
+        }
+
+        $user->password = $request->password;
+        $user->save();
+
+        return $this->SuccessResponse('Password updated successfully', 201);
     }
 
     private function sendVerificationEmail(User $user)

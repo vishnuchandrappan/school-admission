@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DetailsController;
+use App\Http\Controllers\LogsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +34,16 @@ Route::group([
 ], function ($router) {
     Route::post('/', [UserController::class, 'store']);
     Route::put('/verifyUser', [UserController::class, 'verifyUser']);
+    Route::put('/updatePassword', [UserController::class, 'updatePassword'])->middleware('auth');
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'logs'
+], function ($router) {
+    Route::get('/', [LogsController::class, 'showLogs'])->middleware('auth');
+});
+
 
 Route::group([
     'middleware' => 'auth',
