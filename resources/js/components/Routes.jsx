@@ -12,10 +12,10 @@ import { Community } from "./pages/Community";
 export const Routes = () => {
     return (
         <Switch>
-            <ProtectedRoute path="/" exact component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/verifyUser" component={VerifyUser} />
+            <ProtectedRoute path="/" exact component={Home} />
             <ProtectedRoute
                 exact
                 path="/forms/management"

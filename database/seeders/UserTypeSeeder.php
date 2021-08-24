@@ -14,11 +14,15 @@ class UserTypeSeeder extends Seeder
      */
     public function run()
     {
+        $types = UserType::count();
+        if ($types > 0) return;
         $data = [
             [
                 'name' => 'student',
             ],
-            ['name' => 'admin']
+            [
+                'name' => 'admin'
+            ]
         ];
 
         UserType::insert($data);

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -29,7 +30,12 @@ class AuthController extends Controller
     {
         $credentials = $request->only(['email', 'password']);
 
-        if (!$token = auth()->attempt($credentials)) {
+        Log::info($credentials);
+
+        $token = auth()->attempt($credentials);
+        Log::info("token $token");
+
+        if (!$token) {
             return $this->ErrorResponse('Unauthorized', 401);
         }
 

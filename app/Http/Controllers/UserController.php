@@ -6,6 +6,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Mail\VerificationMail;
 use App\Models\User;
+use App\Models\UserType;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -80,6 +81,19 @@ class UserController extends Controller
 
         return $this->SuccessResponse('Password updated successfully', 201);
     }
+
+    public function getStudents()
+    {
+        $students = UserType::where('name', 'student')->first()->users()->with('details.docType')->get();
+        return $this->SuccessData($students);
+    }
+
+    public function getStudent(User $user)
+    {
+        $student = User::where('id', $user->id)->with('details.docType')->first();
+        return $this->SuccessData($student);
+    }
+
 
     private function sendVerificationEmail(User $user)
     {

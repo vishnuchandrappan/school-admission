@@ -33,6 +33,10 @@ Route::group([
     'prefix' => 'users'
 ], function ($router) {
     Route::post('/', [UserController::class, 'store']);
+    Route::get('/students', [
+        UserController::class, 'getStudents'
+    ]);
+    Route::get('/students/{user}', [UserController::class, 'getStudent']);
     Route::put('/verifyUser', [UserController::class, 'verifyUser']);
     Route::put('/updatePassword', [UserController::class, 'updatePassword'])->middleware('auth');
 });
