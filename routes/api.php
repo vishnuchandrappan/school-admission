@@ -58,3 +58,5 @@ Route::group([
     ]);
     Route::get('/', [DetailsController::class, 'show']);
 });
+
+Route::patch('/payments/{payment}', [DetailsController::class, 'verifyPayment']);

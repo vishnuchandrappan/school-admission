@@ -82,9 +82,15 @@ class UserController extends Controller
         return $this->SuccessResponse('Password updated successfully', 201);
     }
 
-    public function getStudents()
+    public function getStudents(Request $request)
     {
-        $students = UserType::where('name', 'student')->first()->users()->with('details.docType')->get();
+        $limit = 1;
+
+        if ($request->limit) {
+            $limit = $request->limit;
+        }
+
+        $students = UserType::where('name', 'student')->first()->users()->with('details.docType')->paginate($limit);
         return $this->SuccessData($students);
     }
 
