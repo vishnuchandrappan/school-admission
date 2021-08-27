@@ -41,9 +41,9 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user->email_verified_at) {
-            return $this->ErrorResponse('Verify your account to continue. Check email for verification link.', 403);
-        }
+        // if (!$user->email_verified_at) {
+        //     return $this->ErrorResponse('Verify your account to continue. Check email for verification link.', 403);
+        // }
 
         return $this->respondWithToken($token);
     }

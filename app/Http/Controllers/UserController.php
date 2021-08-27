@@ -36,7 +36,7 @@ class UserController extends Controller
         ]);
 
         $user = User::create($data);
-        $this->sendVerificationEmail($user);
+        //$this->sendVerificationEmail($user);
         return $this->SuccessData($user, 'user created');
     }
 
