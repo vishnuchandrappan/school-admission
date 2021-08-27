@@ -67,7 +67,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return [
             'user_type' => $this->userType()->first()->name,
-            'data' => $this
+            'data' => $this,
+            'expires_in' => auth()->factory()->getTTL() * 60
         ];
     }
 

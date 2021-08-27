@@ -55,4 +55,50 @@ class DetailsController extends Controller
         ]);
         return $this->SuccessResponse('payment verified');
     }
+
+    public function uploadDocs(Request $request)
+    {
+        $user = auth()->user();
+        $data = [
+            'data' => [
+                'file' => $this->storeFile($request)
+            ]
+        ];
+
+
+        $docType = DocType::where('name', $request->doc_type)->firstOrFail();
+        $data['doc_type_id'] = $docType->id;
+
+        if ($user->details()->where('doc_type_id', $docType->id)->exists()) {
+            // need to delete from storage too.
+            $user->details()->where('doc_type_id', $docType->id)->first()->update($data);
+        } else {
+            $details = $user->details()->create($data);
+        }
+
+        return $this->SuccessData($details);
+    }
+
+    private $supportingDocs =
+    [
+        'ration_card',
+        'aadhar_card',
+        'sslc_marklist',
+        'declaration_from_parish_priest',
+        'other_certificates',
+    ];
+
+    private function getDocIds()
+    {
+        return DocType::whereIn('name', $this->supportingDocs)->pluck('id');
+    }
+
+    public function getSupportingDocs()
+    {
+        $docIds = $this->getDocIds();
+        $user = auth()->user();
+        $data = $user->details()->whereIn('doc_type_id', $docIds)->with('docType')->get();
+
+        return $this->SuccessData($data);
+    }
 }

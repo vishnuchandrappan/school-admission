@@ -56,6 +56,11 @@ Route::group([
     Route::post('/', [
         DetailsController::class, 'store'
     ]);
+    Route::post(
+        '/documents',
+        [DetailsController::class, 'uploadDocs']
+    );
+    Route::get('/documents', [DetailsController::class, 'getSupportingDocs']);
     Route::get('/', [DetailsController::class, 'show']);
 });
 
