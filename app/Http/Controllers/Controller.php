@@ -52,7 +52,6 @@ class Controller extends BaseController
 
     protected function deleteFile($fileName)
     {
-        error_log($fileName);
         if (Storage::exists($fileName)) {
             if (Storage::delete($fileName)) {
                 return true;
