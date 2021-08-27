@@ -8,6 +8,7 @@ use App\Models\Details;
 use App\Models\DocType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class DetailsController extends Controller
 {
@@ -65,13 +66,18 @@ class DetailsController extends Controller
             ]
         ];
 
-
         $docType = DocType::where('name', $request->doc_type)->firstOrFail();
         $data['doc_type_id'] = $docType->id;
 
         if ($user->details()->where('doc_type_id', $docType->id)->exists()) {
-            // need to delete from storage too.
+            $filePath = explode(
+                '/',
+                $user->details()->where('doc_type_id', $docType->id)
+                    ->firstOrFail()->data->file
+            );
+            $this->deleteFile('public/files/' . end($filePath));
             $user->details()->where('doc_type_id', $docType->id)->first()->update($data);
+            $details = $user->details;
         } else {
             $details = $user->details()->create($data);
         }

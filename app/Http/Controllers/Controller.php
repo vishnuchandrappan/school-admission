@@ -50,7 +50,6 @@ class Controller extends BaseController
         return null;
     }
 
-
     protected function deleteFile($fileName)
     {
         if (Storage::exists($fileName)) {
