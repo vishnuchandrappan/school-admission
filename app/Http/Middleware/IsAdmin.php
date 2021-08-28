@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\UserType;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class IsAdmin
 {
@@ -18,14 +18,9 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-
-        if (UserType::where('name', 'admin')->first()
-            ->users()->where('id', Auth::user()->id)->exists()
-        ) {
+        if (Auth::user()->userType()->first()->name == 'admin') {
             return $next($request);
         }
-        return response()->json([
-            'message' => 'Unauthorized',
-        ], 403);
+        throw new HttpException(403, "Forbidden resource");
     }
 }
