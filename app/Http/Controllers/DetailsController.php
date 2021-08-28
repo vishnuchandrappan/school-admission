@@ -100,6 +100,7 @@ class DetailsController extends Controller
         return DocType::whereIn('name', $this->supportingDocs)->pluck('id');
     }
 
+
     public function getSupportingDocs()
     {
         $docIds = $this->getDocIds();
