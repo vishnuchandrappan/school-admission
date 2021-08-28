@@ -22,6 +22,7 @@ class DetailsController extends Controller
         $docType = DocType::where('name', $request->doc_type)->first();
         $data['doc_type_id'] = $docType->id;
 
+
         $details = $user->details()->create($data);
 
         return $this->SuccessData($details);

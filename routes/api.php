@@ -35,8 +35,8 @@ Route::group([
     Route::post('/', [UserController::class, 'store']);
     Route::get('/students', [
         UserController::class, 'getStudents'
-    ]);
-    Route::get('/students/{user}', [UserController::class, 'getStudent']);
+    ])->middleware('auth');
+    Route::get('/students/{user}', [UserController::class, 'getStudent'])->middleware('auth');
     Route::put('/verifyUser', [UserController::class, 'verifyUser']);
     Route::put('/updatePassword', [UserController::class, 'updatePassword'])->middleware('auth');
 });
