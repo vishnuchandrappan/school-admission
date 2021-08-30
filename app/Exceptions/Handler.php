@@ -4,6 +4,14 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Auth\Access\AuthorizationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 use App\Traits\ApiResponser;
 
@@ -43,6 +51,26 @@ class Handler extends ExceptionHandler
         $this->renderable(function (Throwable $e) {
             if ($e instanceof RouteNotFoundException) {
                 return $this->errorResponse('Unauthorized', 401);
+            } elseif ($e instanceof ValidationException) {
+                return $this->errorResponse($e->errors(), $e->status);
+            } else if ($e instanceof ModelNotFoundException) {
+                return $this->errorResponse("Model not found", 404);
+            } else if ($e instanceof AuthenticationException) {
+                return $this->errorResponse("Unauthenticated", 401);
+            } else if ($e instanceof AuthorizationException) {
+                return $this->errorResponse("Unauthorized for the action", 403);
+            } else if ($e instanceof NotFoundHttpException) {
+                return $this->errorResponse("Resource not Found", 404);
+            } else if ($e instanceof MethodNotAllowedHttpException) {
+                return $this->errorResponse("Current method not allowed", 405);
+            } else if ($e instanceof HttpException) {
+                return $this->errorResponse($e->getMessage(), $e->getStatusCode());
+            } else if ($e instanceof QueryException) {
+                if ($e->errorInfo[1] == 1451) {
+                    return $this->errorResponse("Current instance is in relation with other resources thus cannot be removed", 409);
+                }
+            } else {
+                return $this->errorResponse('Try later', 500);
             }
         });
     }
