@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class DetailsController extends Controller
 {
+    private $docIds = null;
     public function store(CreateDetailsRequest $request)
     {
         $user = auth()->user();
@@ -97,16 +98,16 @@ class DetailsController extends Controller
 
     private function getDocIds()
     {
-        return DocType::whereIn('name', $this->supportingDocs)->pluck('id');
+        $this->docIds = DocType::whereIn('name', $this->supportingDocs)->pluck('id');
     }
-
 
     public function getSupportingDocs()
     {
-        // $docIds = $this->getDocIds();
-        // $user = auth()->user();
+        if ($this->docIds == null) {
+            $this->getDocIds();
+        }
         $data = auth()->user()->details()
-            ->whereIn('doc_type_id', $this->getDocIds())
+            ->whereIn('doc_type_id', $this->docIds)
             ->with('docType')
             ->get();
 
