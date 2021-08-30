@@ -7,32 +7,11 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\ApiResponser;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public function SuccessResponse($message = 'Success', $responseCode = 200)
-    {
-        return response()->json([
-            'message' => $message
-        ], $responseCode);
-    }
-
-    public function SuccessData($data = [], $message = 'Success', $responseCode = 200)
-    {
-        return response()->json([
-            'message' => $message,
-            'data' => $data
-        ], $responseCode);
-    }
-
-    public function ErrorResponse($message = 'Error', $responseCode = 400)
-    {
-        return response()->json([
-            'message' => $message
-        ], $responseCode);
-    }
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, ApiResponser;
 
     protected function getFileUrl($fileName)
     {

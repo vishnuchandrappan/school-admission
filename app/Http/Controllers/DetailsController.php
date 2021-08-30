@@ -103,9 +103,12 @@ class DetailsController extends Controller
 
     public function getSupportingDocs()
     {
-        $docIds = $this->getDocIds();
-        $user = auth()->user();
-        $data = $user->details()->whereIn('doc_type_id', $docIds)->with('docType')->get();
+        // $docIds = $this->getDocIds();
+        // $user = auth()->user();
+        $data = auth()->user()->details()
+            ->whereIn('doc_type_id', $this->getDocIds())
+            ->with('docType')
+            ->get();
 
         return $this->SuccessData($data);
     }
